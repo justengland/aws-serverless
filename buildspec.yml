@@ -5,9 +5,10 @@ phases:
       - npm install
   build:
     commands:
-      - npm run package
+      - npm test
   post_build:
     commands:
+      - npm run package
       - npm run deploy
 artifacts:
   type: zip

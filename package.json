@@ -4,10 +4,14 @@
   "description": "Some thing so I can prove out the components of serverless lambda creation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/*",
     "package": "aws cloudformation package --template-file serverless.yaml --s3-bucket lambda-build-store --s3-prefix \"aws-serverless\" --output-template-file serverless-output.yaml",
     "deploy": "aws cloudformation deploy --template-file serverless-output.yaml --stack-name \"aws-serverless\" --capabilities CAPABILITY_IAM || describe-stack-events --stack-name aws-serverless"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.7.21",
+    "mocha": "^3.2.0"
+  }
 }
