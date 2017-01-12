@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha test/*",
     "package": "aws cloudformation package --template-file serverless.yaml --s3-bucket lambda-build-store --s3-prefix \"aws-serverless\" --output-template-file serverless-output.yaml",
-    "publish": "aws cloudformation deploy --template-file serverless-output.yaml --stack-name \"aws-serverless\" --capabilities CAPABILITY_IAM || describe-stack-events --stack-name aws-serverless"
+    "publish": "aws cloudformation deploy --template-file serverless-output.yaml --stack-name \"aws-serverless\" --capabilities CAPABILITY_IAM || describe-stack-events --stack-name aws-serverless",
     "deploy": "npm package && npm publish"
   },
   "author": "",
