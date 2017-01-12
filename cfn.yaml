@@ -52,7 +52,6 @@ Resources:
       Code:
         S3Bucket: lambda-build-store
         S3Key: phantom/code.zip
-        ZipFile: ./code.zip
       Role:
         Fn::GetAtt:
         - PhantomExecutionRole

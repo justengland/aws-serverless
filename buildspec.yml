@@ -2,9 +2,10 @@ version: 0.1
 phases:
   install:
     commands:
-      - npm install time
-      - aws cloudformation package --template-file cfn.yaml --s3-bucket lambda-build-store --output-template-file NewSamTemplate.yaml
+      - npm install
+      - npm run package
+      - npm run deploy
 artifacts:
   type: zip
   files:
-    - NewSamTemplate.yaml
+    - serverless-output.yaml
