@@ -1,5 +1,6 @@
+
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Demo Stack
+Description: AWS CloudFormation CloudWatch Log Janitor Demo Stack
 Resources:
   PhantomExecutionPolicy:
     DependsOn:
@@ -48,7 +49,7 @@ Resources:
       Code:
         S3Bucket: lambda-build-store
         S3Key: phantom/code.zip
-        ZipFile: ./code.zip
+      CodeUri: .
       FunctionName: phantom
       Handler: index.handler
       MemorySize: 128

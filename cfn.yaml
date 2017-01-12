@@ -1,6 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: AWS CloudFormation CloudWatch Log Janitor Demo Stack
+Description: Demo Stack
 Resources:
   PhantomExecutionRole:
     Type: AWS::IAM::Role
@@ -52,6 +52,7 @@ Resources:
       Code:
         S3Bucket: lambda-build-store
         S3Key: phantom/code.zip
+        ZipFile: ./code.zip
       Role:
         Fn::GetAtt:
         - PhantomExecutionRole

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "aws cloudformation package --template-file cfn.yaml --output-template-file serverless-output.yaml --s3-bucket lambda-build-store --profile personal",
+    "package": "aws cloudformation package --template-file cfn.yaml --output-template-file serverless-output.yaml --s3-bucket lambda-build-store --force-upload --profile personal",
     "deploy": "aws cloudformation deploy --template-file serverless-output.yaml --stack-name phantom --profile personal"
   },
   "author": "",
