@@ -41,6 +41,7 @@ Resources:
           - ec2:ResetSnapshotAttribute
           Resource:
           - "*"
+
   PhantomFunction:
     Type: AWS::Lambda::Function
     DependsOn:
