@@ -1,0 +1,13 @@
+{
+  "name": "aws-serverless",
+  "version": "1.0.0",
+  "description": "Some thing so I can prove out the components of serverless lambda creation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "aws cloudformation package --template-file cfn.yaml --output-template-file serverless-output.yaml --s3-bucket lambda-build-store --profile personal",
+    "deploy": "aws cloudformation deploy --template-file serverless-output.yaml --stack-name phantom --profile personal"
+  },
+  "author": "",
+  "license": "ISC"
+}

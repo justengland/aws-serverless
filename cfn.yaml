@@ -1,0 +1,61 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS CloudFormation CloudWatch Log Janitor Demo Stack
+Resources:
+  PhantomExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+  PhantomExecutionPolicy:
+    DependsOn:
+    - PhantomExecutionRole
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: MyLambdaToMakeLogsRolePolicy
+      Roles:
+      - Ref: PhantomExecutionRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - logs:*
+          Resource:
+          - arn:aws:logs:*:*:*
+        - Effect: Allow
+          Action:
+          - ec2:Describe*
+          - ec2:CreateSnapshot
+          - ec2:DeleteSnapshot
+          - ec2:CreateTags
+          - ec2:ModifySnapshotAttribute
+          - ec2:ResetSnapshotAttribute
+          Resource:
+          - "*"
+  PhantomFunction:
+    Type: AWS::Lambda::Function
+    DependsOn:
+    - PhantomExecutionRole
+    - PhantomExecutionPolicy
+    Properties:
+      FunctionName: phantom
+      Code:
+        S3Bucket: lambda-build-store
+        S3Key: phantom/code.zip
+      Role:
+        Fn::GetAtt:
+        - PhantomExecutionRole
+        - Arn
+      Timeout: 60
+      Handler: index.handler
+      Runtime: nodejs4.3
+      MemorySize: 128
