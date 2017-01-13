@@ -28,7 +28,7 @@ Resources:
               - sts:AssumeRole
           Path: "/"
 
-      SweetLambdaBuildPolicy:
+    SweetLambdaBuildPolicy:
         Type: AWS::IAM::Policy
         Properties:
           PolicyName: SweetLambdaPipelinePolicy
