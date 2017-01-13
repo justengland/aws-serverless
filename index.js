@@ -4,8 +4,6 @@ var phantomjs = require('phantomjs-prebuilt');
 
 exports.handler = function(event, context, callback) {
     console.log('The monk has landed');
-    callback(null, "fin!");
-
     var phantom = phantomjs.exec('phantomjs-script.js', 'arg1', 'arg2');
 
     phantom.stdout.on('data', function(buf) {
@@ -19,7 +17,7 @@ exports.handler = function(event, context, callback) {
     });
 
     phantom.on('exit', code => {
-        callback(null, bucketName);
+        callback(null, 'fin!!');
     });
 
 };
