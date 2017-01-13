@@ -5,6 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test/*",
+
+    "deploy-pipeline": "aws cloudformation deploy --template-file pipeline.yaml --stack-name \"aws-serverless-pipeline\" --capabilities CAPABILITY_IAM --parameter-overrides EnvironmentName=TESTEST GitHubUser=justengland --profile personal",
+
+    "pkg": "aws cloudformation package --template-file ./cfn/master.yaml --s3-bucket lambda-build-store --s3-prefix \"aws-serverless\" --output-template-file serverless-output.yaml",
+    "pub": "aws cloudformation deploy --template-file serverless-output.yaml --stack-name \"masterblaster\" --capabilities CAPABILITY_IAM",
+
+
     "package": "aws cloudformation package --template-file serverless.yaml --s3-bucket lambda-build-store --s3-prefix \"aws-serverless\" --output-template-file serverless-output.yaml",
     "publish": "aws cloudformation deploy --template-file serverless-output.yaml --stack-name \"aws-serverless\" --capabilities CAPABILITY_IAM",
     "deploy": "npm run package && npm run publish"

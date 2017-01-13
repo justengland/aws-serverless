@@ -1,50 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: First working Lambda Pipeline
+Description: Pipeline CFN
 Resources:
-  LambdaExecutionPolicy:
-    DependsOn:
-    - PhantomExecutionRole
+  Security:
     Properties:
-      PolicyDocument:
-        Statement:
-        - Action:
-          - logs:*
-          Effect: Allow
-          Resource:
-          - arn:aws:logs:*:*:*
-        - Action:
-          - ec2:Describe*
-          - ec2:CreateSnapshot
-          - ec2:DeleteSnapshot
-          - ec2:CreateTags
-          - ec2:ModifySnapshotAttribute
-          - ec2:ResetSnapshotAttribute
-          Effect: Allow
-          Resource:
-          - '*'
-        Version: '2012-10-17'
-      PolicyName: MyLambdaToMakeLogsRolePolicy
-      Roles:
-      - Ref: PhantomExecutionRole
-    Type: AWS::IAM::Policy
-  LambdaExecutionRole:
-    Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-        - Action:
-          - sts:AssumeRole
-          Effect: Allow
-          Principal:
-            Service:
-            - lambda.amazonaws.com
-        Version: '2012-10-17'
-      Path: /
-    Type: AWS::IAM::Role
-  SweetLambda:
-    Properties:
-      CodeUri: s3://lambda-build-store/aws-serverless/c066107928f19a1c6b3c715640b2e3a7
-      Description: Some sweet lambda action
-      Handler: index.handler
-      Runtime: nodejs4.3
-    Type: AWS::Serverless::Function
+      Parameters:
+        EnvironmentName:
+          Ref: AWS::StackName
+      TemplateURL: s3://lambda-build-store/aws-serverless/af7a79dcebfed6c2abef9a1044b810c7.template
+    Type: AWS::CloudFormation::Stack
 Transform: AWS::Serverless-2016-10-31
