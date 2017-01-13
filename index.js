@@ -1,10 +1,10 @@
 
-var AWS = require('aws-sdk');
-var phantomjs = require('phantomjs-prebuilt');
+// var AWS = require('aws-sdk');
+// var phantomjs = require('phantomjs-prebuilt');
 
 exports.handler = function(event, context, callback) {
     console.log('The monk has landed');
-    callback(null, bucketName);
+    callback(null, "fin!");
 
     // var phantom = phantomjs.exec('phantomjs-script.js', 'arg1', 'arg2');
     //
