@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless Example Security Section
+
+Parameters:
+    EnvironmentName:
+        Description: An environment name that will be prefixed to resource names
+        Type: String
+
+Resources:
+    BuildRole:
+        Type: AWS::IAM::Role
+        Properties:
+          AssumeRolePolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                - codebuild.amazonaws.com
+                - codepipeline.amazonaws.com
+              Action:
+              - sts:AssumeRole
+          Path: "/"
+
+    BuildPolicy:
+        Type: AWS::IAM::Policy
+        Properties:
+          PolicyName: !Join ['-', [!Ref 'AWS::StackName', 'BuildPolicy']]
+          Roles:
+          - Ref: BuildRole
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+              - logs:*
+              Resource:
+              - arn:aws:logs:*:*:*
+            - Effect: Allow
+              Action:
+              - codebuild:*
+              - iam:PassRole
+              - iam:GetRole
+              - iam:CreateRole
+              - iam:PutRolePolicy
+              - iam:DeleteRolePolicy
+              - iam:DeleteRole
+              - lambda:*
+              - cloudformation:*
+              - s3:*
+              Resource:
+              - "*"

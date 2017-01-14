@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Pipeline CFN
+Parameters: null
+Resources:
+  BuildPolicy:
+    Properties:
+      PolicyDocument:
+        Statement:
+        - Action:
+          - logs:*
+          Effect: Allow
+          Resource:
+          - arn:aws:logs:*:*:*
+        - Action:
+          - codebuild:*
+          - iam:PassRole
+          - iam:GetRole
+          - iam:CreateRole
+          - iam:PutRolePolicy
+          - iam:DeleteRolePolicy
+          - iam:DeleteRole
+          - lambda:*
+          - cloudformation:*
+          - s3:*
+          Effect: Allow
+          Resource:
+          - '*'
+        Version: '2012-10-17'
+      PolicyName:
+        Fn::Join:
+        - '-'
+        - - Ref: AWS::StackName
+          - BuildPolicy
+      Roles:
+      - Ref: BuildRole
+    Type: AWS::IAM::Policy
+  BuildRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - codebuild.amazonaws.com
+            - codepipeline.amazonaws.com
+        Version: '2012-10-17'
+      Path: /
+    Type: AWS::IAM::Role
+Transform: AWS::Serverless-2016-10-31

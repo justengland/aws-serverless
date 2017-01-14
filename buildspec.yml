@@ -3,12 +3,12 @@ phases:
   install:
     commands:
       - npm install
-  build:
+  pre_build:
     commands:
       - npm test
-  post_build:
+  build:
     commands:
-      - npm run deploy
+      - npm run package
 artifacts:
   type: zip
   files:

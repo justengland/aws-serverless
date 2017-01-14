@@ -1,0 +1,29 @@
+{
+    "projectsNotFound": [], 
+    "projects": [
+        {
+            "name": "Phantom", 
+            "serviceRole": "arn:aws:iam::163859100295:role/service-role/code-build-Phantom-service-role", 
+            "tags": [], 
+            "artifacts": {
+                "packaging": "NONE", 
+                "type": "CODEPIPELINE", 
+                "name": "Phantom"
+            }, 
+            "lastModified": 1484249989.578, 
+            "timeoutInMinutes": 10, 
+            "created": 1484249989.578, 
+            "environment": {
+                "computeType": "BUILD_GENERAL1_SMALL", 
+                "image": "aws/codebuild/nodejs:4.3.2", 
+                "type": "LINUX_CONTAINER", 
+                "environmentVariables": []
+            }, 
+            "source": {
+                "type": "CODEPIPELINE"
+            }, 
+            "encryptionKey": "arn:aws:kms:us-west-2:163859100295:alias/aws/s3", 
+            "arn": "arn:aws:codebuild:us-west-2:163859100295:project/Phantom"
+        }
+    ]
+}
